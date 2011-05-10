@@ -1,0 +1,84 @@
+Server needs to: 
+	Receive uploaded video
+	Process requested resource
+	List resources that are in the cloud
+	Give out detailed information about resources it has
+	Give out thumbnails of resources
+
+(by resource I mean video clip. In future this could be archive of videos, pictures, a link to resources at some other place, etc.)
+
+1. Receive uploaded video
+	LOCATION:
+		/UploadResource
+	INPUT:
+		multipart request that has 1 video file in it
+	OUTPUT:
+		Could be that it takes too much time to calculate all those values, then there are 2 options: 1) replace unknown fields with string N/A 2) just return a resouceID
+		JSON describing uploaded resource. In the form of:
+		{
+			ID : <string>, # only condition is that it should be unique (could use good old MD5)
+			title : <string>, # possibly read title from media file. could be left empty
+			fileName : <string>,
+			size : <double>, # bytes
+			duration : <double> # seconds
+		}
+
+2. Process requested resource
+	LOCATION:
+		/ProcessResources
+	INPUT:
+		JSON list of resourceID's
+		resources : ["ID123","ID124"]
+	OUTPUT:
+		Status object (JSON) describing what is happening with the request
+		{
+			statusCode : <string>, # short string like STARTED,PROCESSING,FINISHED,ERROR
+			statusDescription : <string> # could be longer string explaining status code
+		}
+
+3. List resources that are in the cloud
+	LOCATION:
+		/ListResources
+	INPUT:
+		nothing
+	OUTPUT:
+		JSON list of resources
+		[
+			{
+				ID : <string>,
+				title : <string>,
+				fileName : <string>,
+				size : <double>,
+				duration : <double>
+			},
+			{
+				ID : <string>,
+				title : <string>,
+				fileName : <string>,
+				size : <double>,
+				duration : <double>
+			}
+		]
+
+4. Give out detailed information about resources it has
+	LOCATION:
+		/ResourceDetails
+	INPUT:
+		Post request with 1 parameter(key/value) : resourceID : <string>
+	OUTPUT:
+		JSON string with media resource description
+		{
+			ID : <string>,
+			title : <string>,
+			fileName : <string>,
+			size : <double>,
+			duration : <double>
+		}
+
+5. Give out thumbnails of resources
+	LOCATION:
+		/ResourceThumbnails
+	INPUT:
+		Post request with 1 parameter(key/value): resourceID:<string>
+	OUTPUT:
+		PNG image of size 85x85
