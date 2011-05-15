@@ -12,4 +12,8 @@ public class FileUploaderFactory {
 	public static FileUploader newMockFileUploader() {
 		return new MockFileUploader();
 	}
+	
+	public static FileUploader newS3FileUploader() {
+		return new S3FileUploader();
+	}
 }

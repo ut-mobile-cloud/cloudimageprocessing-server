@@ -4,6 +4,7 @@
  */
 package ee.ut.cs.cloudimageprocessingserver.fileupload;
 
+import ee.ut.cs.cloudimageprocessingserver.model.Resource;
 import java.io.File;
 import java.util.List;
 
@@ -11,28 +12,10 @@ import java.util.List;
  *
  * @author madis
  */
-class MockFileUploader implements FileUploader {
-
-	public MockFileUploader() {
-	}
-
+class MockFileUploader extends AbstractFileUploader {
+	
 	@Override
-	public FileUploader withFilesFromServletRequest() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public FileUploader withFiles(List<File> files) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public FileUploader withFile(File file) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public String upload() {
+	public List<Resource> upload() {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 	

@@ -4,6 +4,9 @@
  */
 package ee.ut.cs.cloudimageprocessingserver.fileupload;
 
+import ee.ut.cs.cloudimageprocessingserver.model.Resource;
+import java.util.List;
+
 /**
  *
  * @author madis
@@ -17,7 +20,7 @@ public class FileUploadTask implements Runnable{
 	
 	@Override
 	public void run() {
-		String xxx = uploader.upload();
+		List<Resource> uploadedResource = uploader.upload();
 		
 		
 	}

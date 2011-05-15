@@ -53,25 +53,7 @@ public class UploadResource extends HttpServlet {
         return uploadedFile;
     }
     
-    private void sendRequestToCloud(List<File>files) {
-		// TODO: Carlos sent the name of this bucket to your e-mail
-        String DefaultS3BucketName = null;//"ut-ee-cs-ds-mobilecloud-testbucket";
-        AmazonS3 s3 = null;
-        try {
-			s3 = new AmazonS3Client(new PropertiesCredentials(
-					this.getClass().getClassLoader().getResourceAsStream("AwsCredentials.properties")));
-		} catch (IOException ex) {
-			//Logger.getLogger(UploadPictureTask.class.getName()).log(Level.SEVERE, null, ex);
-		}
-        s3.createBucket(DefaultS3BucketName);
-		for (File file : files) {
-			// TODO: filename should be taken from somewhere. Otherwise all hell breaks loose.
-			String fileName = null;
-			PutObjectResult putObjectResult = s3.putObject(DefaultS3BucketName, fileName, file);
-			System.out.println("File name : " + fileName);
-		}
-        
-    }
+    
 	/** 
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 * @param request servlet request
@@ -110,6 +92,7 @@ public class UploadResource extends HttpServlet {
 		
 		FileUploader uploader = FileUploaderFactory.newMockFileUploader()
 				.withFiles(files);
+		
 		
 		Thread uploadThread = new Thread(new FileUploadTask(uploader));
 		uploadThread.start();
