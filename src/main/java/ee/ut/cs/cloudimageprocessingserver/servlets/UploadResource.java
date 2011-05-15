@@ -87,28 +87,19 @@ public class UploadResource extends HttpServlet {
                 }
             }
         } catch (Exception ex) {
-            
+            System.err.println(ex.getMessage());
         }
 		
-		FileUploader uploader = FileUploaderFactory.newMockFileUploader()
-				.withFiles(files);
-		
-		
-		Thread uploadThread = new Thread(new FileUploadTask(uploader));
-		uploadThread.start();
+//		FileUploader uploader = FileUploaderFactory.newMockFileUploader()
+//				.withFiles(files);
+//		
+//		
+//		Thread uploadThread = new Thread(new FileUploadTask(uploader));
+//		uploadThread.start();
 		
 		PrintWriter out = response.getWriter();
 		try {
-			/* TODO output your page here
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet UploadResource</title>");  
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>Servlet UploadResource at " + request.getContextPath () + "</h1>");
-			out.println("</body>");
-			out.println("</html>");
-			 */
+			out.println("Files : " + files);
 		} finally {			
 			out.close();
 		}

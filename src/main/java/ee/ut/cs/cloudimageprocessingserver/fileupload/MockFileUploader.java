@@ -6,6 +6,7 @@ package ee.ut.cs.cloudimageprocessingserver.fileupload;
 
 import ee.ut.cs.cloudimageprocessingserver.model.Resource;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,8 @@ class MockFileUploader extends AbstractFileUploader {
 	
 	@Override
 	public List<Resource> upload() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		System.out.println("MockFileUploader: Should fake uploading files");
+		return new ArrayList<Resource>();
 	}
 	
 }
