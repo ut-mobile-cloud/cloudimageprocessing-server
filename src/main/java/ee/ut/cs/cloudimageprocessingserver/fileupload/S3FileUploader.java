@@ -40,6 +40,7 @@ class S3FileUploader extends AbstractFileUploader {
 			PutObjectResult putObjectResult = s3.putObject(DefaultS3BucketName, fileName, file);
 			resource.setID(putObjectResult.getETag());
 			System.out.println("Uploaded file named : " + fileName + " to S3");
+			uploadedResources.add(resource);
 		}
 		return uploadedResources;
 	}

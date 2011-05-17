@@ -16,4 +16,8 @@ public class FileUploaderFactory {
 	public static FileUploader newS3FileUploader() {
 		return new S3FileUploader();
 	}
+	
+	public static FileUploader newLocalFileUploader() {
+		return new LocalFileUploader();
+	}
 }

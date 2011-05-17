@@ -4,6 +4,10 @@
  */
 package ee.ut.cs.cloudimageprocessingserver.servlets;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import ee.ut.cs.cloudimageprocessingserver.ResourceManager;
+import ee.ut.cs.cloudimageprocessingserver.model.Resource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -30,17 +34,9 @@ public class ListResources extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		Gson gson = new GsonBuilder().create();
 		try {
-			/* TODO output your page here
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet ListResources</title>");  
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>Servlet ListResources at " + request.getContextPath () + "</h1>");
-			out.println("</body>");
-			out.println("</html>");
-			 */
+			out.print(gson.toJson(ResourceManager.getInstance().getAllResources())); 
 		} finally {			
 			out.close();
 		}

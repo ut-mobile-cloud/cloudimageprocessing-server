@@ -14,7 +14,7 @@ import java.util.List;
  */
 public abstract class AbstractFileUploader implements FileUploader {
 	
-	List<File> files;
+	protected List<File> files;
 	
 	public AbstractFileUploader() {
 		super();

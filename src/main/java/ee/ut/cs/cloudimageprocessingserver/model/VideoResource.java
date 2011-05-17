@@ -11,6 +11,7 @@ import java.io.File;
  * @author madis
  */
 public class VideoResource implements Resource {
+	
 	private String ID;
 	private String title;
 	private Long size;
@@ -70,9 +71,11 @@ public class VideoResource implements Resource {
 	@Override
 	public Resource updateWithDataFromFile(File file) {
 		// FIX: update with real values as they would come from video file
+		this.ID = Integer.toString(this.hashCode());
 		this.setDuration(60);
 		this.setTitle("Bicycle repairman but how?");
 		this.setSize(file.length());
+		this.location = file.getAbsolutePath();
 		return this;
 	}
 }

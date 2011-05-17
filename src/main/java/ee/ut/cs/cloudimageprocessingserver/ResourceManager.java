@@ -5,6 +5,7 @@
 package ee.ut.cs.cloudimageprocessingserver;
 
 import ee.ut.cs.cloudimageprocessingserver.model.Resource;
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -15,7 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ResourceManager {
 	private Map<String, Resource> resources;
 	private static ResourceManager instance = null;
-	static ResourceManager getInstance() {
+	
+	public static ResourceManager getInstance() {
 		if (instance == null) {
 			instance = new ResourceManager();
 		}
@@ -32,5 +34,9 @@ public class ResourceManager {
 	
 	public Resource resourceForKey(String key) {
 		return this.resources.get(key);
+	}
+	
+	public Collection<Resource> getAllResources() {
+		return resources.values();
 	}
 }

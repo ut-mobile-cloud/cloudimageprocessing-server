@@ -8,9 +8,11 @@ import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectResult;
+import ee.ut.cs.cloudimageprocessingserver.ResourceManager;
 import ee.ut.cs.cloudimageprocessingserver.fileupload.FileUploadTask;
 import ee.ut.cs.cloudimageprocessingserver.fileupload.FileUploader;
 import ee.ut.cs.cloudimageprocessingserver.fileupload.FileUploaderFactory;
+import ee.ut.cs.cloudimageprocessingserver.model.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -90,8 +92,13 @@ public class UploadResource extends HttpServlet {
             System.err.println(ex.getMessage());
         }
 		
-//		FileUploader uploader = FileUploaderFactory.newMockFileUploader()
-//				.withFiles(files);
+		FileUploader uploader = FileUploaderFactory.newS3FileUploader()
+				.withFiles(files);
+		List<Resource> resourcesToUpload = uploader.upload();
+		for (Resource resource : resourcesToUpload) {
+			ResourceManager.getInstance().addResource(resource);
+		}
+		
 //		
 //		
 //		Thread uploadThread = new Thread(new FileUploadTask(uploader));
