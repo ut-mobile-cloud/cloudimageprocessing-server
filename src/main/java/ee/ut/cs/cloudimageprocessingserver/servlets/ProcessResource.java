@@ -4,6 +4,10 @@
  */
 package ee.ut.cs.cloudimageprocessingserver.servlets;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import ee.ut.cs.cloudimageprocessingserver.model.VideoResource;
+import ee.ut.cs.cloudimageprocessingserver.notifications.NotificationCentre;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -29,6 +33,19 @@ public class ProcessResource extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
+		Gson gson = new GsonBuilder().create();
+		String resourceJson = request.getParameter("resource");
+		VideoResource requestedResource = gson.fromJson(resourceJson, VideoResource.class);
+		
+		// TODO: process the requestedResource. When processing is done, notify device.
+		// Currently deviceToken for our iphone is 5324075b4c07afa9e2dbe15b74dbda2227a74d5537f0d4af24cc0aecda697f1c
+		// Example is given here: (this code should be called when processing is COMPLETE
+		NotificationCentre.getProviderForDevice("iphone")
+				.withDeviceData("5324075b4c07afa9e2dbe15b74dbda2227a74d5537f0d4af24cc0aecda697f1c")
+				.withMessage("Processing complete")
+				.withKeyValuePairs("resource", resourceJson)
+				.send();
+		
 		PrintWriter out = response.getWriter();
 		try {
 			/* TODO output your page here

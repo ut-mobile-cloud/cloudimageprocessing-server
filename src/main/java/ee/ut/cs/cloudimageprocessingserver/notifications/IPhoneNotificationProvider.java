@@ -51,12 +51,11 @@ public class IPhoneNotificationProvider implements NotificationProvider {
 
         try {
             InputStream certStream = this.getClass().getClassLoader().getResourceAsStream("Certificates.p12");
-            APNS.newPayload();
+            //APNS.newPayload();
             service = APNS.newService()
-					.withCert(certStream, "iphone4")
+					.withCert(certStream, "ToreOn")//.withCert(certStream, "K1llerTomato")
 					.withSandboxDestination()
 					.build();
-
             service.start();
 
             String payload = APNS.newPayload()
