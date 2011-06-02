@@ -47,22 +47,36 @@ public class RequestTestTimesServlet extends HttpServlet {
 			
 			responseJson = gson.toJson(serverTimes);
         } else {
-            StringBuilder builder = new StringBuilder();
-//            for (SyncTestTimes t : SyncTestTimesManager.sharedManager().getAllTimes()) {
-//                builder.append(gson.toJson(t));
-//                System.out.println("Added time to response : " + gson.toJson(t));
-//            }
-			for (Object time : TestTimesManager.sharedManager().getAllTimes()) {
-				builder.append(gson.toJson(time));
-				builder.append("\n<BR>");
-//				if (time instanceof SyncTestTimes) {
-//					builder.append(((SyncTestTimes)time).toString());
-//				} else if (time instanceof AsyncTestTimes) {
-//					builder.append(((AsyncTestTimes)time).toString());
-//				} else {
-//					builder.append("Times was neither Async nor Sync");
-//				}
-				
+//            StringBuilder builder = new StringBuilder();
+//			for (Object time : TestTimesManager.sharedManager().getAllTimes()) {
+//				builder.append(gson.toJson(time));
+//				builder.append("\n<BR>");				
+//			}
+//            responseJson = builder.toString();
+//			
+			StringBuilder builder = new StringBuilder();
+			double difference = -78.227944;
+			double beginning = 0;
+			String columnsTitlesRow = "ClientInitialRequest, ServerReceiveInitialRequest, ServerSendImmediateResponse, ClientReceiveImmediateResponse, ServerRequestToCloud, ServerResponseFromCloud, ServerSendPushNotification, ClientReceivePushNotification\n";
+			builder.append(columnsTitlesRow);
+			for (AsyncTestTimes asyncTime : TestTimesManager.sharedManager().allAsyncTimes()) {
+				beginning = asyncTime.getClientInitialRequest();
+				builder.append(asyncTime.getClientInitialRequest()-beginning);
+				builder.append(", ");
+				builder.append(asyncTime.getServerReceiveInitialRequest()-beginning+difference);
+				builder.append(", ");
+				builder.append(asyncTime.getServerSendImmediateResponse()-beginning+difference);
+				builder.append(", ");
+				builder.append(asyncTime.getClientReceiveImmediateResponse()-beginning);
+				builder.append(", ");
+				builder.append(asyncTime.getServerRequestToCloud()-beginning+difference);
+				builder.append(", ");
+				builder.append(asyncTime.getServerResponseFromCloud()-beginning+difference);
+				builder.append(", ");
+				builder.append(asyncTime.getServerSendPushNotification()-beginning+difference);
+				builder.append(", ");
+				builder.append(asyncTime.getClientReceivePushNotification()-beginning);
+				builder.append("\n");
 			}
             responseJson = builder.toString();
         }

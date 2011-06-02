@@ -23,6 +23,9 @@ public class TestTimesManager {
         asyncTestTimesMap = new ConcurrentHashMap<String, AsyncTestTimes>();
     }
     
+	public Collection<AsyncTestTimes> allAsyncTimes() {
+		return asyncTestTimesMap.values();
+	}
 	public static double timeNow() {
         return ((double)System.currentTimeMillis())/1000;
     }
