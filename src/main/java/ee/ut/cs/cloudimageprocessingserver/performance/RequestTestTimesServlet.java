@@ -55,7 +55,7 @@ public class RequestTestTimesServlet extends HttpServlet {
 //            responseJson = builder.toString();
 //			
 			StringBuilder builder = new StringBuilder();
-			double difference = -78.227944;
+			double difference = -119.993868;
 			double beginning = 0;
 			String columnsTitlesRow = "ClientInitialRequest, ServerReceiveInitialRequest, ServerSendImmediateResponse, ClientReceiveImmediateResponse, ServerRequestToCloud, ServerResponseFromCloud, ServerSendPushNotification, ClientReceivePushNotification\n";
 			builder.append(columnsTitlesRow);

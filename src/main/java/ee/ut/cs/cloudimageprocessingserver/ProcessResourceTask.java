@@ -29,22 +29,22 @@ public class ProcessResourceTask implements Runnable {
 		String url = "https://s3.amazonaws.com/cloudimageprocessing/" + "input"; //+ resourceToProcess.getTitle(); // TODO: create url string from resourceToProcess
 		AsyncTestTimes times = (AsyncTestTimes)TestTimesManager.sharedManager().getTimesForTestID(resourceToProcess.getID());
 		times.setServerRequestToCloud(timeNow());
-		try {
-			// Actual processing with example file. Actual input is not 
-						Process p = Runtime.getRuntime().exec("/usr/bin/java -jar /Volumes/data/src/mp.jar "
-								+ "https://s3.amazonaws.com/cloudimageprocessing/input "
-								+ "output "
-								+ url);
-			try {
-				p.waitFor();
-			} catch (InterruptedException ex) {
-				Logger.getLogger(ProcessResourceTask.class.getName()).log(Level.SEVERE, null, ex);
-			}
-						System.out.println(p.getErrorStream().toString());
-						
-		} catch (IOException ex) {
-			Logger.getLogger(ProcessResourceTask.class.getName()).log(Level.SEVERE, null, ex);
-		}
+//		try {
+//			// Actual processing with example file. Actual input is not 
+//						Process p = Runtime.getRuntime().exec("/usr/bin/java -jar /Volumes/data/src/mp.jar "
+//								+ "https://s3.amazonaws.com/cloudimageprocessing/input "
+//								+ "output "
+//								+ url);
+//			try {
+//				p.waitFor();
+//			} catch (InterruptedException ex) {
+//				Logger.getLogger(ProcessResourceTask.class.getName()).log(Level.SEVERE, null, ex);
+//			}
+//						System.out.println(p.getErrorStream().toString());
+//						
+//		} catch (IOException ex) {
+//			Logger.getLogger(ProcessResourceTask.class.getName()).log(Level.SEVERE, null, ex);
+//		}
 			
 		times.setServerResponseFromCloud(timeNow());
 		System.out.println("I have times : " + times.toString());

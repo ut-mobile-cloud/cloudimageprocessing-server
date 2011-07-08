@@ -1,0 +1,10 @@
+Server code for an application made for Grid and cloud computing class in University of Tartu.
+Server handles requests made by mobiles. Main operations are:
+	- getting list of resources(videos) stored in cloud
+	- getting resource details
+	- selecting resource for processing
+
+Here is overview of this application:
+
+CloudImageProcessing goal is to allow user to upload a video files and request processing of those uploaded. Processing makes use of concept similar to MapReduce patented by Google. Processing takes a video file and extracts each frame as a picture. Each picture is then searched for faces and specially eyes when found the eyes are covered with black box. After all frames have been processed, images are joined back to video file. After completing processing, user is notified. He then can request viewing of the new video.
+Application is made up from three parts: cloud, web service and client application.
